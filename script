@@ -1,0 +1,179 @@
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "Senator " .. Fluent.Version,
+    SubTitle = "by Senator",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = false, -- The blur may be detectable, setting this to false disables blur entirely
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl -- Used when theres no MinimizeKeybind
+})
+
+--Fluent provides Lucide Icons https://lucide.dev/icons/ for the tabs, icons are optional
+local Tabs = {
+    Main = Window:AddTab({ Title = "Combot", Icon = "settings" }),
+    Esp = Window:AddTab({ Title = "Esp", Icon = "settings" }),
+    Misc = Window:AddTab({ Title = "Misc", Icon = "settings" }),
+    Teleport = Window:AddTab({ Title = "Teleport", Icon = "settings" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+}
+
+local Options = Fluent.Options
+
+do
+    Fluent:Notify({
+        Title = "Notification",
+        Content = "This is a notification",
+        SubContent = "join discord server https://discord.gg/RXA8txAqdB ", -- Optional
+        Duration = 5 -- Set to nil to make the notification not disappear
+    })
+
+
+
+    Tabs.Main:AddParagraph({
+        Title = "информейшон",
+        Content = "чтобы выключить аим, нажмите Del"
+    })
+
+    Tabs.Main:AddButton({
+        Title = "aimbot",
+        Description = "аимчик",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/VikaUw/aimbot.gui/main/aimbot"))()
+        end
+    })
+
+
+    Tabs.Esp:AddButton({
+        Title = "esp",
+        Description = "позвольяет видеть других через стены",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/VikaUw/esp.gui/main/esp"))()
+        end
+    })
+
+    local Slider = Tabs.Misc:AddSlider("Slider", {
+        Title = "WalkSpeed",
+        Description = "может кикнуть анти чит",
+        Default = 16,
+        Min = 16,
+        Max = 30,
+        Rounding = 1,
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = (Value)
+        end
+    })
+
+    local Slider = Tabs.Misc:AddSlider("Slider", {
+        Title = "JumpPower",
+        Description = "может кикнуть анти чит",
+        Default = 16,
+        Min = 50,
+        Max = 100,
+        Rounding = 1,
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = (Value)
+        end
+    })
+
+    Tabs.Misc:AddButton({
+        Title = "ctrl click tp",
+        Description = "по бинду тепаетись куда смотрит ваш курсор мыши",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/VikaUw/ctrl.gui/main/tp"))()
+        end
+    })
+
+
+    Tabs.Teleport:AddButton({
+        Title = "НПС бандитов (приём боеприпасов)",
+        Description = "после нажатия вас тепает в нужное место",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(622.970581, 2.00003338, -700.422058, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+        end
+    })
+
+    Tabs.Teleport:AddButton({
+        Title = "Склад боеприпассав",
+        Description = "после нажатия вас тепает в нужное место",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(174.514984, 28.3902626, 120.954865, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+        end
+    })
+
+    Tabs.Teleport:AddButton({
+        Title = "база бандитов",
+        Description = "после нажатия вас тепает в нужное место",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(652.5, 48.7250023, -648.563416, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+        end
+    })
+
+    Tabs.Teleport:AddButton({
+        Title = "КПП вч",
+        Description = "после нажатия вас тепает в нужное место",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(314.504669, 10.3500004, 52.8272552, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+        end
+    })
+
+    Tabs.Teleport:AddButton({
+        Title = "ВЧ центр",
+        Description = "после нажатия вас тепает в нужное место",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-16.1954041, 18.8249969, 56.0522614, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+        end
+    })
+
+    Tabs.Teleport:AddButton({
+        Title = "Военная Полиция центр",
+        Description = "после нажатия вас тепает в нужное место",
+        Callback = function()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(1192.32495, 29.2000008, -369.436615, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+        end
+    })
+
+
+
+
+
+-- Addons:
+-- SaveManager (Allows you to have a configuration system)
+-- InterfaceManager (Allows you to have a interface managment system)
+
+-- Hand the library over to our managers
+SaveManager:SetLibrary(Fluent)
+InterfaceManager:SetLibrary(Fluent)
+
+-- Ignore keys that are used by ThemeManager.
+-- (we dont want configs to save themes, do we?)
+SaveManager:IgnoreThemeSettings()
+
+-- You can add indexes of elements the save manager should ignore
+SaveManager:SetIgnoreIndexes({})
+
+-- use case for doing it this way:
+-- a script hub could have themes in a global folder
+-- and game configs in a separate folder per game
+InterfaceManager:SetFolder("FluentScriptHub")
+SaveManager:SetFolder("FluentScriptHub/specific-game")
+
+InterfaceManager:BuildInterfaceSection(Tabs.Settings)
+SaveManager:BuildConfigSection(Tabs.Settings)
+
+
+Window:SelectTab(1)
+
+Fluent:Notify({
+    Title = "Fluent",
+    Content = "The script has been loaded.",
+    Duration = 8
+})
+
+-- You can use the SaveManager:LoadAutoloadConfig() to load a config
+-- which has been marked to be one that auto loads!
+SaveManager:LoadAutoloadConfig()
+end
